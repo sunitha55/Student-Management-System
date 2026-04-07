@@ -1,0 +1,71 @@
+package org.student.dto;
+
+public class Student {
+
+    private int id;
+    private String name;
+    private String email;
+    private String password;
+    private long mobile;
+    private double percentage;
+    private String gender;
+    private String stream;
+    private String degree;
+    private String address;
+
+    public Student(int id, String name, String email, String password,
+                   long mobile, double percentage, String gender,
+                   String stream, String degree, String address) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.mobile = mobile;
+        this.percentage = percentage;
+        this.gender = gender;
+        this.stream = stream;
+        this.degree = degree;
+        this.address = address;
+    }
+
+    public int getId() 
+    { 
+    	return id; 
+    }
+    public String getName() 
+    {
+    	return name; 
+    }
+    public String getEmail() 
+    { 
+    	return email;
+    }
+    public String getPassword() 
+    { 
+    	return password;
+    }
+    public long getMobile() 
+    { 
+    	return mobile; 
+    }
+    public double getPercentage() 
+    { 
+    	return percentage; 
+    }
+    public String getGender() 
+    { 
+    	return gender;
+    }
+    public String getStream() 
+    { 
+    	return stream;
+    }
+    public String getDegree() 
+    { 
+    	return degree;
+    }
+    public String getAddress() 
+    { 
+    	return address;
+    }
+}
