@@ -1,0 +1,25 @@
+package org.student.controller;
+
+import org.student.dao.StudentDAO;
+import org.student.dto.Student;
+
+public class StudentService {
+
+    StudentDAO dao = new StudentDAO();
+
+    public void addStudent(Student s) {
+        dao.insertStudent(s);
+    }
+
+    public void viewStudents() {
+        dao.viewStudents();
+    }
+
+    public void updateStudent(int id, String email, double percentage) {
+        dao.updateStudent(id, email, percentage);
+    }
+
+    public void deleteStudent(int id) {
+        dao.deleteStudent(id);
+    }
+}
