@@ -1,0 +1,125 @@
+package org.student.dao;
+
+import java.sql.*;
+import org.student.dto.Student;
+
+public class StudentDAO {
+
+    public int insertStudent(Student s) {
+        int result = 0;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/advance_java?user=root&password=root");
+
+            String query = "insert into student_details values(?,?,?,?,?,?,?,?,?,?)";
+            PreparedStatement ps = con.prepareStatement(query);
+
+            ps.setInt(1, s.getId());
+            ps.setString(2, s.getName());
+            ps.setString(3, s.getEmail());
+            ps.setString(4, s.getPassword());
+            ps.setLong(5, s.getMobile());
+            ps.setDouble(6, s.getPercentage());
+            ps.setString(7, s.getGender());
+            ps.setString(8, s.getStream());
+            ps.setString(9, s.getDegree());
+            ps.setString(10, s.getAddress());
+
+            result = ps.executeUpdate();
+
+            if (result > 0)
+                System.out.println("Student Registered Successfully");
+            else
+                System.out.println("Insert Failed");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public void viewStudents() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/advance_java?user=root&password=root");
+
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("select * from student_details");
+
+            while (rs.next()) {
+                System.out.println(
+                        rs.getInt("student_id") + " " +
+                        rs.getString("student_name") + " " +
+                        rs.getString("student_emailid") + " " +
+                        rs.getDouble("student_percentage"));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public int updateStudent(int id, String email, double percentage) {
+        int result = 0;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/advance_java?user=root&password=root");
+
+            String query = "update student_details set student_percentage=? where student_id=? and student_emailid=?";
+            PreparedStatement ps = con.prepareStatement(query);
+
+            ps.setDouble(1, percentage);
+            ps.setInt(2, id);
+            ps.setString(3, email);
+
+            result = ps.executeUpdate();
+
+            if (result > 0)
+                System.out.println("Updated Successfully");
+            else
+                System.out.println("Update Failed");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public int deleteStudent(int id) {
+        int result = 0;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/advance_java?user=root&password=root");
+
+            String query = "delete from student_details where student_id=?";
+            PreparedStatement ps = con.prepareStatement(query);
+
+            ps.setInt(1, id);
+
+            result = ps.executeUpdate();
+
+            if (result > 0)
+                System.out.println("Deleted Successfully");
+            else
+                System.out.println("Delete Failed");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+}
